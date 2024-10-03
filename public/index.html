@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noxtools Member Page</title>
+</head>
+<body>
+    <h1>Noxtools Member Page</h1>
+    <div id="memberContent"></div>
+    <button id="logoutButton">Logout</button>
+
+    <script>
+        async function fetchData() {
+            const response = await fetch('/api/member');
+            const data = await response.text();
+            document.getElementById('memberContent').innerHTML = data;
+        }
+
+        async function logout() {
+            await fetch('/api/logout', { method: 'POST' });
+            alert('Logged out successfully!');
+            window.location.reload(); // Refresh the page after logout
+        }
+
+        document.getElementById('logoutButton').addEventListener('click', logout);
+
+        fetchData(); // Initial fetch
+    </script>
+</body>
+</html>
